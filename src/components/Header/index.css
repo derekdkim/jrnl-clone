@@ -1,0 +1,24 @@
+.header {
+  box-shadow: 0 3px 6px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
+  background-color: #00426b;
+  height: 56px;
+
+  display: grid;
+  grid-template-columns: 1fr 10fr;
+  align-items: center;
+}
+
+.header img {
+  position: relative;
+  height: 26px;
+  top: -2px;
+}
+
+nav {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 5fr 1fr;
+}
+
+nav p {
+  font-size: 1em;
+}
