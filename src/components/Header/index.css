@@ -11,7 +11,7 @@
 .header img {
   position: relative;
   height: 26px;
-  top: -2px;
+  margin: 1px 0 0 -2px;
 }
 
 nav {
