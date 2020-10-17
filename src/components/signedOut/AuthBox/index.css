@@ -53,6 +53,8 @@
 
 .input-container {
   padding: 20px 0;
+  text-align: left;
+  box-sizing: border-box;
 }
 
 .text-input {
@@ -66,9 +68,12 @@
 }
 
 .text-input-error {
+  display: block;
   font-size: 12px;
   color: #d50000;
   margin-top: 3px;
+  line-height: 20px;
+  height: 20px;
 }
 
 .auth-btn {
@@ -81,4 +86,9 @@
   border: none;
   border-radius: 3px;
   font-weight: 600;
+}
+
+.auth-btn:disabled {
+  background-color: rgba(0,0,0,.12);
+  color: rgba(0, 0, 0,.26);
 }
