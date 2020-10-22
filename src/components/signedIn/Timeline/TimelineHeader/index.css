@@ -1,0 +1,46 @@
+.timeline-header {
+  background: linear-gradient(180deg,#fff 0,#f4f4f5);
+  box-shadow: 0 3px 6px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
+
+  display: flex;
+  align-items: center;
+}
+
+.icon-btn {
+  padding: 0 12px;
+  height: 48px;
+  background: transparent;
+  border: none;
+}
+
+.btn-icon {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+.search-btn {
+  width: 48px;
+}
+
+.timeline-title {
+  padding: 8px 0;
+  font-size: 16px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.timeline-header-right {
+  display: flex;
+  margin-left: auto;
+}
+
+.timeline-pager {
+  display: flex;
+}
+
+.timeline-current {
+  display: flex;
+  align-items: center;
+}

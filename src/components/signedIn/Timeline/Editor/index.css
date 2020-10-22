@@ -1,0 +1,72 @@
+.editor-header-elem {
+  color: #00b4cc;
+}
+
+.editor-date {
+  color: #00b4cc;
+  font-size: 14px;
+  font-weight: 700;
+  margin-right: 5px;
+}
+
+.editor-title {
+  padding: 10px 16px;
+  border-width: 1px 0 1px; 
+  border-style: solid;
+  border-color: rgba(0,0,0,0.1);
+  font-size: 1.1em;
+  width: 100%;
+  font-weight: 600;
+  box-sizing: border-box;
+}
+
+.editor-title::placeholder {
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.editor-content {
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  font-size: 1.1em;
+  padding: 16px;
+  line-height: 160%;
+  letter-spacing: -0.01em;
+  color: rgba(0,0,0,.87);
+}
+
+.editor-content::placeholder {
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.editor-footer {
+  padding: 0 16px 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.editor-footer button {
+  font-size: 14px;
+  font-weight: 600;
+  height: 36px;
+  line-height: 36px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: none;
+  padding: 0 16px;
+}
+
+.cancel-btn {
+  width: 86px;
+  background: none;
+  color: rgba(0, 0, 0, 0.9)
+}
+
+.save-btn {
+  margin-left: 10px;
+  background-color: #00b4cc;
+  color: white;
+  border-radius: 3px;
+}

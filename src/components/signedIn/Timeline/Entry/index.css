@@ -1,0 +1,119 @@
+.entry-container {
+  margin: 0 auto;
+  width: 672px;
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0, 0.24);
+  margin: 0 0 1em;
+
+  font-family: 'Open Sans', sans-serif;
+  text-align: left;
+}
+
+.entry-avatar {
+  margin-right: 14px;
+  height: 40px;
+}
+
+.entry-avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+}
+
+.entry-header {
+  padding: 12px 12px 12px 15px;
+  display: flex;
+
+  align-items: center;
+
+  color: rgba(0,0,0,0.6);
+  font-weight: 500;
+  font-size: 11px;
+}
+
+.entry-header-meta {
+  width: 100%;
+}
+
+.entry-header-meta p {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.entry-date-time {
+  display: flex;
+  display: row;
+}
+
+.entry-date {
+  color: black;
+  font-size: 14px;
+  font-weight: 700;
+  margin-right: 5px;
+}
+
+.entry-date-right-col {
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+  color: rgba(0,0,0,.4);
+}
+
+.entry-last-updated {
+  font-size: 13px;
+}
+
+.entry-journal {
+  font-size: 13px;
+}
+
+.entry-body {
+  padding: 2px 15px;
+}
+
+.entry-title h1 {
+  color: #00b4cc;
+  font-size: 1.4em;
+  font-weight: 600;
+  line-height: 130%;
+  margin: 0 0 10px 0;
+}
+
+.entry-content {
+  font-size: 1em;
+  line-height: 160%;
+  font-weight: 400;
+}
+
+.entry-footer {
+  padding: 4px 15px;
+}
+
+.entry-comments-btn {
+  border: transparent;
+  background: none;
+  color: rgba(0,0,0,.6);
+  line-height: 32px;
+  height: 32px;
+  font-size: 11px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.menu-btn {
+  border: none;
+  background: none;
+  width: 20px;
+  height: 20px;
+}
+
+.menu-btn:before {
+  content: '\2807';
+  height: 17px;
+  width: 17px;
+  line-height: 1em;
+  font-size: 150%;
+  color: rgba(0,0,0,.4);
+}

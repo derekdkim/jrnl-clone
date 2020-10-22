@@ -1,50 +1,61 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './index.css';
 
 const Header = () => {
-  const [activeTab, setActiveTab] = useState('/');
-
-  useEffect(() => {
-    const currentURL = window.location.href;
-    const index = currentURL.substring(0, currentURL.length - 1).lastIndexOf('/');
-    const currentTabName = currentURL.substring(index, currentURL.length);
-    console.log(currentURL, index, currentTabName);
-    setActiveTab(currentTabName);
-  }, []);
 
   return(
     <header className='header'>
-      <a 
-        href='/'
+      <NavLink 
+        to='/timeline/'
         id='nav-logo'
-      ><img src={require('../../images/jrnl-logo-clear.png')} alt='logo' /></a>
+      ><img src={require('../../images/jrnl-logo-clear.png')} alt='logo' /></NavLink>
       <nav>
-        <a 
-          href='/'
-          id='nav-timeline'
-          className={activeTab === '/' ? 'active-tab' : ''}
-        >TIMELINE</a>
-        <a 
-          href='/journals/'
-          id='nav-journals'
-          className={activeTab === '/journals/' ? 'active-tab' : ''}
-        >JOURNALS</a>
-        <a 
-          href='/books/'
-          id='nav-books'
-          className={activeTab === '/books/' ? 'active-tab' : ''}
-        >BOOKS</a>
-        <a 
-          href='/all-about-me/'
-          id='nav-aam'
-          className={activeTab === '/all-about-me/' ? 'active-tab' : ''}
-        >ALL ABOUT ME</a>
-        <div></div>
-        <a 
-          href='/account/settings/'
-          id='nav-settings'
-          className={activeTab === '/settings/' ? 'active-tab' : ''}
-        >USER_PROFILE</a>
+        <div id='nav-left'>
+          <NavLink 
+            to='/timeline/'
+            id='nav-timeline'
+            activeClassName='active-tab'
+          >
+            <span>TIMELINE</span>
+            <span className='nav-active-bar'></span>
+          </NavLink>
+          <NavLink 
+            to='/journals/'
+            id='nav-journals'
+            activeClassName='active-tab'
+          >
+            <span>JOURNALS</span>
+            <span className='nav-active-bar'></span>
+          </NavLink>
+          <NavLink 
+            to='/books/'
+            id='nav-books'
+            activeClassName='active-tab'
+          >
+            <span>BOOKS</span>
+            <span className='nav-active-bar'></span>
+          </NavLink>
+          <NavLink 
+            to='/all-about-me/'
+            id='nav-aam'
+            activeClassName='active-tab'
+          >
+            <span>ALL ABOUT ME</span>
+            <span className='nav-active-bar'></span>
+          </NavLink>
+        </div>
+        <div id='nav-right'>
+          <NavLink 
+              to='/account/settings/'
+              id='nav-settings'
+              activeClassName='active-tab'
+            >
+              <img id='nav-profile-pic' src={require('../../images/avatar.png')} alt='avatar'/>
+              <span>USER_PROFILE</span>
+              <span className='nav-active-bar'></span>
+          </NavLink>
+        </div>
       </nav>
     </header>
   );

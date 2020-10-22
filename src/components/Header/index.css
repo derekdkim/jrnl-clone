@@ -5,19 +5,34 @@
   font-family: 'Open Sans', sans-serif;
 
   display: grid;
-  grid-template-columns: 1fr 10fr;
+  grid-template-columns: 124px 10fr;
   align-items: center;
 }
 
 .header img {
-  position: relative;
   height: 26px;
-  margin: 1px 0 0 -2px;
+  margin: 1px 0 0 -5px;
 }
 
 nav {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr) 5fr 1fr;
+  height: 100%;
+  overflow: hidden;
+}
+
+#nav-left {
+  float: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+#nav-right {
+  float: right;
+  height: 100%;
+}
+
+#nav-settings {
   height: 100%;
 }
 
@@ -27,8 +42,32 @@ nav a {
   user-select: none;
   font-weight: 500;
   height: 100%;
+  padding: 0 16px;
+
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .active-tab {
-  border-bottom: 3px solid white;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.2);
+  background: rgba(0,0,0,.1);
+}
+
+.active-tab .nav-active-bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3px;
+  background-color: white;
+}
+
+#nav-profile-pic {
+  width: 24px;
+  height: 24px;
+  border-radius: 100px;
+  order: 1;
+  margin-left: 16px;
 }

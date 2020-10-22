@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './index.css';
 
 import LogIn from '../LogIn';
@@ -11,8 +12,8 @@ const AuthBox = (props) => {
     <div className='auth-tab'>
       <div className='auth-box-container'>
         <div className='auth-box-tab-nav'>
-          <a id='signup-btn' className={tab === 'signup' ? 'selected-tab' : ''} href='/signup/'>SIGNUP</a>
-          <a id='login-btn' className={tab === 'login' ? 'selected-tab' : ''} href='/login/'>LOGIN</a>
+          <NavLink id='signup-btn' className={tab === 'signup' ? 'selected-tab' : ''} href='/signup/'>SIGNUP</NavLink>
+          <NavLink id='login-btn' className={tab === 'login' ? 'selected-tab' : ''} href='/login/'>LOGIN</NavLink>
         </div>
           <div>
             {
