@@ -1,10 +1,33 @@
 import React from 'react';
+import './index.css';
 
-const JournalsTab = () => {
+import JournalsTagsNav from '../JournalsTagsNav';
+import Journals from '../Journals';
+import Tags from '../Tags';
 
-  return(
+const JournalsTab = (props) => {
+  const { tab } = props;
+
+  const selectTabContent = () => {
+    if (tab === 'journals') {
+      return (
+        <Journals />
+      );
+    } else {
+      return (
+        <Tags />
+      );
+    }
+  }
+
+  return (
     <div id='content'>
-      <p>JournalsTab</p>
+      <div className='container-container'>
+        <div className='entry-container'>
+          <JournalsTagsNav />
+          { selectTabContent() }
+        </div>
+      </div>
     </div>
   );
 }

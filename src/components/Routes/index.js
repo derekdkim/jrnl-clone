@@ -12,8 +12,10 @@ const Routes = () => {
   return(
     <Switch>
       <Route path='/timeline' component={TimelineTab}/>
-      <Route path='/journals' component={JournalsTab}/>
-      <Route path='/books' component={BooksTab}/>
+      <Route path='/journals' render={() => <JournalsTab tab='journals'/>} />
+      <Route path='/tags' render={() => <JournalsTab tab='tags'/>} />
+      <Route path='/books' render={() => <BooksTab tab='books'/>} />
+      <Route path='/book-orders' render={() => <BooksTab tab='orders'/>} />
       <Route path='/all-about-me' component={AAMTab}/>
       <Route path='/account/settings' component={SettingsTab}/>
       <Route path='/signup' render={() => <AuthBox tab='signup'/>} />

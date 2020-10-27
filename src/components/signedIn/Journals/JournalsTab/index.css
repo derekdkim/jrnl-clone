@@ -1,0 +1,31 @@
+.tab-header {
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  background-image: linear-gradient(rgb(255, 255, 255) 0px, rgb(244, 244, 245));
+}
+
+.tab-meta {
+  display: flex;
+  align-items: center;
+  padding: 10px 10px 10px 16px;
+}
+
+.tab-meta-left {
+  flex-grow: 1;
+  font-weight: 600;
+}
+
+.tab-btn {
+  line-height: 34px;
+  letter-spacing: .5px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0 16px;
+  background-image: linear-gradient(rgb(255, 255, 255) 0px, rgb(244, 244, 245));
+  box-sizing: border-box;
+  border: 1px solid rgba(0,0,0,.2);
+  border-radius: 3px;
+}
+
+.tab-body {
+  padding: 8px 0;
+}
