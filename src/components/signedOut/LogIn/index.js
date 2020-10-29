@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import './index.css';
+import firebase from '../../../Firebase.js';
 
-const LogIn = () => {
-  const [emailUsername, setEmailUsername] = useState({errMsg: ''});
+import { useAuthContext } from '../../../context/AuthContextProvider.js';
+
+const LogIn = (props) => {
+  const [email, setEmail] = useState({errMsg: ''});
   const [password, setPassword] = useState({errMsg: ''});
   const [formCompleted, setFormCompleted] = useState(false);
 
-  const validateEmailUsername = (event) => {
+  const auth = useAuthContext();
+
+  const validateEmail = (event) => {
     const currValue = event.target.value;
     let currErrMsg = '';
     let currValidity = true;
 
     if (currValue.length === 0) {
-      currErrMsg = 'Enter email or username';
+      currErrMsg = 'Enter email';
       currValidity = false;
     }
 
-    setEmailUsername({
+    setEmail({
       value: currValue,
       errMsg: currErrMsg,
       valid: currValidity
@@ -40,34 +45,46 @@ const LogIn = () => {
     });
   }
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+    firebase.auth().signInWithEmailAndPassword(email.value, password.value).then(function() {
+      console.log('Login successful');
+      console.log(firebase.auth().currentUser);
+      auth.setLoggedIn(true);
+    }).catch(function(error) {
+      console.log(`Error ${error.code}: ${error.message}`);
+    });
+  }
+
   useEffect(() => {
-    if (emailUsername.valid && password.valid) {
+    if (email.valid && password.valid) {
       setFormCompleted(true);
     } else {
       setFormCompleted(false);
     }
-  }, [emailUsername, password]);
+  }, [email, password]);
 
   return(
     <div className='signed-out-tab-container'>
       <div className='form-container'>
         <form 
           className='auth-form'
+          onSubmit={handleLogin}
           noValidate
         >
           <div className='input-container'>
-            <label htmlFor='login-id-input'>Email or Username</label>
+            <label htmlFor='login-id-input'>Email</label>
             <input 
               type='text' 
               className='text-input' 
               id='login-id-input'
-              onChange={validateEmailUsername}
+              onChange={validateEmail}
               required
             ></input>
-            <span className='text-input-error'>{emailUsername.errMsg}</span>
+            <span className='text-input-error'>{email.errMsg}</span>
           </div>
           <div className='input-container'>
-            <label htmlFor='login-password-input'>New Password</label>
+            <label htmlFor='login-password-input'>Password</label>
             <input 
               type='text' 
               className='text-input' 

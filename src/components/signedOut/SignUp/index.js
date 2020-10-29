@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import firebase from '../../../Firebase.js';
 
 const SignUp = () => {
   const [email, setEmail] = useState({errMsg: ''});
-  const [username, setUsername] = useState({errMsg: ''});
   const [password, setPassword] = useState({errMsg: ''});
   const [formCompleted, setFormCompleted] = useState(false);
 
@@ -16,25 +16,6 @@ const SignUp = () => {
     }
 
     setEmail((prevState) => {
-      return {
-        ...prevState,
-        value: currValue,
-        valid: currValidity,
-        errMsg: currErrMsg 
-      }
-    });
-  }
-
-  const validateUsername = (event) => {
-    let currValidity = true;
-    let currErrMsg = '';
-    const currValue = event.target.value;
-    if (!/[A-Za-z0-9._@+-]+/.test(currValue)) {
-      currValidity = false;
-      currErrMsg = 'Only letters, numbers and @/./+/-/_ allowed';
-    }
-
-    setUsername((prevState) => {
       return {
         ...prevState,
         value: currValue,
@@ -66,13 +47,22 @@ const SignUp = () => {
     });
   }
 
+  const handleSubmit = () => {
+    firebase.auth().createUserWithEmailAndPassword(email.value, password.value).catch(function(error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+
+      console.log(`Error ${errorCode}: ${errorMessage}`);
+    });
+  }
+
   useEffect(() => {
-    if (email.valid && username.valid && password.valid) {
+    if (email.valid && password.valid) {
       setFormCompleted(true);
     } else {
       setFormCompleted(false);
     }
-  }, [email, username, password]);
+  }, [email, password]);
 
 
 
@@ -81,6 +71,7 @@ const SignUp = () => {
       <div className='form-container'>
         <form 
           className='auth-form'
+          onSubmit={handleSubmit}
           noValidate
         >
           <div className='input-container'>
@@ -93,17 +84,6 @@ const SignUp = () => {
               required
             ></input>
             <span className='text-input-error'>{email.errMsg}</span>
-          </div>
-          <div className='input-container'>
-            <label htmlFor='signup-username-input'>Username</label>
-            <input 
-              type='text' 
-              className='text-input' 
-              id='signup-username-input'
-              onChange={validateUsername}
-              required
-            ></input>
-            <span className='text-input-error'>{username.errMsg}</span>
           </div>
           <div className='input-container'>
             <label htmlFor='signup-password-input'>New Password</label>

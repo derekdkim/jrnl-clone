@@ -27,3 +27,9 @@
   line-height: 130%;
   color: rgba(0, 0, 0, 0.9);
 }
+
+.logout-btn {
+  background: none;
+  border: none;
+  width: 100%;
+}

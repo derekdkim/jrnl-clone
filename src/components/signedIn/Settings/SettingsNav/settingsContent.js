@@ -41,11 +41,7 @@ const SupportContent = [
   {
     name: 'JRNL Blog',
     href:'blog.jrnl.com'
-  },
-  {
-    name: 'Logout',
-    href:''
-  },
+  }
 ];
 
 export { SettingsContent, SupportContent };

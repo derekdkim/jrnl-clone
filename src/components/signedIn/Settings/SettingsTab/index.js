@@ -2,8 +2,10 @@ import React from 'react';
 import './index.css';
 
 import SettingsNav from '../SettingsNav';
+import firebase from '../../../../Firebase.js';
 
 const SettingsTab = () => {
+  const user = firebase.auth().currentUser;
 
   return(
     <div id='content'>
@@ -18,8 +20,8 @@ const SettingsTab = () => {
                 <img src={require('../../../../images/avatar.png')} alt='avatar' />
               </div>
               <div className='profile-text-container'>
-                <span className='profile-name'>DemoUser</span>
-                <span className='profile-email'>demo@test.com</span>
+                <span className='profile-name'>{user.email}</span>
+                <span className='profile-email'>{user.email}</span>
                 <span className='profile-joined'>Joined on May 15, 2018</span>
               </div>
             </div>

@@ -2,14 +2,14 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './index.css';
 
-const Header = () => {
+import { useAuthContext } from '../../context/AuthContextProvider.js';
 
-  return(
-    <header className='header'>
-      <NavLink 
-        to='/timeline/'
-        id='nav-logo'
-      ><img src={require('../../images/jrnl-logo-clear.png')} alt='logo' /></NavLink>
+const Header = () => {
+  const auth = useAuthContext();
+
+  // Only render nav components if the user is logged in.
+  const renderNavComponents = () => {
+    return (
       <nav>
         <div id='nav-left'>
           <NavLink 
@@ -57,6 +57,20 @@ const Header = () => {
           </NavLink>
         </div>
       </nav>
+    );
+  }
+
+  return(
+    <header className='header'>
+      <NavLink 
+        to='/timeline/'
+        id='nav-logo'
+      ><img src={require('../../images/jrnl-logo-clear.png')} alt='logo' /></NavLink>
+      {
+        auth.loggedIn
+          ? renderNavComponents()
+          : <div></div>
+      }
     </header>
   );
 }

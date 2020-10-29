@@ -12,8 +12,8 @@ const AuthBox = (props) => {
     <div className='auth-tab'>
       <div className='auth-box-container'>
         <div className='auth-box-tab-nav'>
-          <NavLink id='signup-btn' className={tab === 'signup' ? 'selected-tab' : ''} href='/signup/'>SIGNUP</NavLink>
-          <NavLink id='login-btn' className={tab === 'login' ? 'selected-tab' : ''} href='/login/'>LOGIN</NavLink>
+          <NavLink id='signup-btn' className={tab === 'signup' ? 'selected-tab' : ''} to='/signup/'>SIGNUP</NavLink>
+          <NavLink id='login-btn' className={tab === 'login' ? 'selected-tab' : ''} to='/login/'>LOGIN</NavLink>
         </div>
           <div>
             {

@@ -3,7 +3,19 @@ import { NavLink } from 'react-router-dom';
 import './index.css';
 import { SettingsContent, SupportContent } from './settingsContent.js';
 
+import firebase from '../../../../Firebase.js';
+import { useAuthContext } from '../../../../context/AuthContextProvider.js';
+
 const SettingsNav = () => {
+  const auth = useAuthContext();
+
+  const handleLogout = () => {
+    firebase.auth().signOut().then(function() {
+      auth.setLoggedIn(false);
+    }).catch(function(error) {
+      console.log(`Signout failed. ${error.message}`);
+    });
+  }
 
   return (
     <div className='vert-nav-container'>
@@ -35,6 +47,10 @@ const SettingsNav = () => {
               rel="noopener noreferrer"
             >{item.name}</a>
           )}
+          <button
+            className='vert-nav-item logout-btn'
+            onClick={handleLogout}
+          >Logout</button>
         </div>
       </div>
     </div>
