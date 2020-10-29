@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import firebase from '../../../Firebase.js';
 
+import { useHistory } from 'react-router-dom';
+
 const SignUp = () => {
   const [email, setEmail] = useState({errMsg: ''});
   const [password, setPassword] = useState({errMsg: ''});
   const [formCompleted, setFormCompleted] = useState(false);
+  
+  const history = useHistory();
 
   const validateEmail = (event) => {
     let currValidity = true;
@@ -48,7 +52,12 @@ const SignUp = () => {
   }
 
   const handleSubmit = () => {
-    firebase.auth().createUserWithEmailAndPassword(email.value, password.value).catch(function(error) {
+    firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
+      .then(function() {
+        console.log('Account created!');
+        history.push('/login');
+      })
+      .catch(function(error) {
       const errorCode = error.code;
       const errorMessage = error.message;
 

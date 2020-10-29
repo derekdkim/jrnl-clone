@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './index.css';
 import firebase from '../../../Firebase.js';
+import { useHistory } from 'react-router-dom';
 
 import { useAuthContext } from '../../../context/AuthContextProvider.js';
 
@@ -10,6 +11,7 @@ const LogIn = (props) => {
   const [formCompleted, setFormCompleted] = useState(false);
 
   const auth = useAuthContext();
+  const history = useHistory();
 
   const validateEmail = (event) => {
     const currValue = event.target.value;
@@ -51,6 +53,7 @@ const LogIn = (props) => {
       console.log('Login successful');
       console.log(firebase.auth().currentUser);
       auth.setLoggedIn(true);
+      history.push('/timeline');
     }).catch(function(error) {
       console.log(`Error ${error.code}: ${error.message}`);
     });
