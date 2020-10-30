@@ -3,7 +3,8 @@ import './index.css';
 
 import { lorem, megaLorem } from '../../../../placeholder/lorem.js';
 
-const Entry = () => {
+const Entry = (props) => {
+  const { data } = props;
 
   return(
     <div className='entry-container'>
@@ -24,13 +25,10 @@ const Entry = () => {
       </div>
       <div className='entry-body'>
         <div className='entry-title'>
-          <h1>My Diary Entry</h1>
+          <h1>{data.title}</h1>
         </div>
         <div className='entry-content'>
-          <p>{lorem}</p>
-          <p>{lorem}</p>
-          <p>{megaLorem}</p>
-          <p>{lorem}</p>
+          <p>{data.content}</p>
         </div>
       </div>
       <div className='entry-footer'>

@@ -88,6 +88,10 @@
   font-weight: 400;
 }
 
+.entry-content p {
+  white-space: pre-line;
+}
+
 .entry-footer {
   padding: 4px 15px;
 }
