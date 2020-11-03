@@ -1,15 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.css';
 import TextareaAutosize from 'react-textarea-autosize';
 
 import firebase from '../../../../Firebase.js';
+import { formatEntryDate, formatEntryTime } from '../../../../util/Time.js';
+import { useModalContext } from '../../../../context/ModalContextProvider.js';
 
 const Editor = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [entryDate, setEntryDate] = useState(Date.now());
 
+  const modal = useModalContext();
+  const { setSelectedDate, selectedDate, toggleTimeModal } = modal;
   const fAuth = firebase.auth();
   const fDB = firebase.firestore();
+
+  useEffect(() => {
+    // Only update from context if there is a valid date stored
+    if (selectedDate) {
+      setEntryDate(selectedDate);
+    }
+  }, [selectedDate]);
+
+  const openTimeModal = () => {
+    setSelectedDate(entryDate);
+    toggleTimeModal(true);
+  }
 
   const updateTitle = (e) => {
     setTitle(e.target.value);
@@ -20,26 +37,28 @@ const Editor = () => {
   }
 
   const submitEntry = () => {
-    console.log('Submitting entry');
-
     fDB.collection('users').doc(fAuth.currentUser.uid).collection('entries').doc()
       .set({
         title: title,
-        content: content
+        content: content,
+        journal: 'Placeholder Journal',
+        entryDate: entryDate,
+        modifiedDate: Date.now()
       }, { merge: true }).catch((error) => {
         console.log(`Failed: ${error.message}`);
       });
   }
 
-  return(
+  return (
     <div className='entry-container'>
       <div className='entry-header'>
         <div className='entry-avatar'>
           <img src={require('../../../../images/avatar.png')} alt='avatar'/>
         </div>
         <div className='entry-header-meta'>
-          <div className='entry-date-time'>
-            <p className='editor-date'>Today</p><p className='entry-time editor-header-elem'>@ 5:08pm</p>
+          <div className='entry-date-time' onClick={openTimeModal}>
+            <p className='editor-date'>{formatEntryDate(entryDate)}</p>
+            <p className='entry-time editor-header-elem'>{`@ ${formatEntryTime(entryDate)}`}</p>
           </div>
           <div className='entry-journal editor-header-elem'><p>Placeholder Journal</p></div>
         </div>

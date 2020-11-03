@@ -1,8 +1,6 @@
 import React from 'react';
 import './index.css';
 
-import { lorem, megaLorem } from '../../../../placeholder/lorem.js';
-
 const Entry = (props) => {
   const { data } = props;
 

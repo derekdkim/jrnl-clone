@@ -50,8 +50,6 @@ const LogIn = (props) => {
   const handleLogin = (e) => {
     e.preventDefault();
     firebase.auth().signInWithEmailAndPassword(email.value, password.value).then(function() {
-      console.log('Login successful');
-      console.log(firebase.auth().currentUser);
       auth.setLoggedIn(true);
       history.push('/timeline');
     }).catch(function(error) {

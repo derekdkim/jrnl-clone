@@ -3,6 +3,7 @@ import { HashRouter } from 'react-router-dom';
 import './App.css';
 
 import { AuthContextProvider } from './context/AuthContextProvider.js';
+import { ModalContextProvider } from './context/ModalContextProvider.js';
 import Header from './components/Header';
 import Routes from './components/Routes';
 
@@ -12,7 +13,9 @@ function App() {
       <HashRouter>
         <AuthContextProvider>
           <Header />
-          <Routes />          
+          <ModalContextProvider>
+            <Routes />   
+          </ModalContextProvider>
         </AuthContextProvider>
       </HashRouter>
 

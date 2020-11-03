@@ -1,0 +1,42 @@
+.modal-box {
+  box-shadow: 0 9px 46px 8px rgba(0,0,0,.14), 0 11px 15px -7px rgba(0,0,0,.12), 0 24px 38px 3px rgba(0,0,0,.2);
+  z-index: 9;
+  position: absolute;
+}
+
+.time-modal-header {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.time-modal-header h1 {
+  font-size: 1.4em;
+  padding: 0 1em;
+  font-weight: 400;
+}
+
+.time-modal-body {
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.time-modal-footer {
+  padding: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.save-btn {
+  font-size: 14px;
+  font-weight: 600;
+  height: 36px;
+  line-height: 36px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: none;
+  padding: 0 16px;
+}
