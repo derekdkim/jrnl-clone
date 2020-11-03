@@ -1,6 +1,8 @@
 import React from 'react';
 import './index.css';
 
+import { formatEntryDate, formatEntryTime, formatModifiedDate } from '../../../../util/Time.js';
+
 const Entry = (props) => {
   const { data } = props;
 
@@ -12,9 +14,10 @@ const Entry = (props) => {
         </div>
         <div className='entry-header-meta'>
           <div className='entry-date-time'>
-            <p className='entry-date'>Oct 7, 2020</p><p className='entry-time'>6:10pm</p>
+            <p className='entry-date'>{formatEntryDate(data.entryDate)}</p>
+            <p className='entry-time'>{formatEntryTime(data.entryDate)}</p>
             <div className='entry-date-right-col'>
-              <p className='entry-last-updated'>13d</p>
+              <p className='entry-last-updated'>{formatModifiedDate(data.modifiedDate)}</p>
               <button className='menu-btn'></button>
             </div>
           </div>

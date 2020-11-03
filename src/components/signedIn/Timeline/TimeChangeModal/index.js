@@ -14,7 +14,7 @@ const TimeChangeModal = () => {
     console.log('Date updated');
     // Update entry date only if a valid date was selected.
     if (pickedDate) {
-      setSelectedDate(pickedDate);
+      setSelectedDate(Date.parse(pickedDate));
     }
 
     // Close modal component

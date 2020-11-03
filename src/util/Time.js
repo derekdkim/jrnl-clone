@@ -50,4 +50,22 @@ const isItToday = (year, month, day) => {
   return false;
 }
 
-export { formatEntryDate, formatEntryTime };
+const formatModifiedDate = (date) => {
+  // Months is technically incorrect due to not every month having 30 days 
+  const operations = [1000, 60, 60, 24, 30, 12, 1];
+  const units = ['sec', 'min', 'hour', 'day', 'month', 'year'];
+  let dateDiff = Date.now() - date;
+  console.log(dateDiff);
+
+  // Bring date up to larger units until an appropriate range is found
+  for (let i = 0; i <= operations.length; i++) {
+    dateDiff /= operations[i];
+    if (dateDiff < operations[i + 1]) {
+      let plural = Math.floor(dateDiff) > 1 ? 's' : '';
+      return `${Math.floor(dateDiff)}${units[i]}${plural}`; 
+    }
+  }
+  return undefined;
+}
+
+export { formatEntryDate, formatEntryTime, formatModifiedDate };
