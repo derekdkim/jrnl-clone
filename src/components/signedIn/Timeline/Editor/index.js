@@ -42,8 +42,8 @@ const Editor = () => {
         title: title,
         content: content,
         journal: 'Placeholder Journal',
-        entryDate: entryDate,
-        modifiedDate: Date.now()
+        entryDate: new Date(entryDate),
+        modifiedDate: new Date()
       }, { merge: true }).catch((error) => {
         console.log(`Failed: ${error.message}`);
       });

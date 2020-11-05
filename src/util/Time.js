@@ -21,7 +21,7 @@ const formatEntryTime = (date) => {
   let AMPM = 'am';
   
   // PM if past noon. Otherwise defaults to AM
-  if (hr > 12) {
+  if (hr >= 12) {
     AMPM = 'pm';
 
     // Convert from 24h time to 12h unless hr was exactly 12
@@ -55,17 +55,16 @@ const formatModifiedDate = (date) => {
   const operations = [1000, 60, 60, 24, 30, 12, 1];
   const units = ['sec', 'min', 'hour', 'day', 'month', 'year'];
   let dateDiff = Date.now() - date;
-  console.log(dateDiff);
 
   // Bring date up to larger units until an appropriate range is found
   for (let i = 0; i <= operations.length; i++) {
     dateDiff /= operations[i];
     if (dateDiff < operations[i + 1]) {
       let plural = Math.floor(dateDiff) > 1 ? 's' : '';
-      return `${Math.floor(dateDiff)}${units[i]}${plural}`; 
+      return `${Math.floor(dateDiff)} ${units[i]}${plural}`; 
     }
   }
   return undefined;
 }
 
-export { formatEntryDate, formatEntryTime, formatModifiedDate };
+export { formatEntryDate, formatEntryTime, formatModifiedDate, entryMonths };

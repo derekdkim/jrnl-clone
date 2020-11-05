@@ -6,6 +6,9 @@ import { formatEntryDate, formatEntryTime, formatModifiedDate } from '../../../.
 const Entry = (props) => {
   const { data } = props;
 
+  const modMillis = data.modifiedDate.toMillis();
+  const entryMillis = data.entryDate.toMillis();
+
   return(
     <div className='entry-container'>
       <div className='entry-header'>
@@ -14,10 +17,10 @@ const Entry = (props) => {
         </div>
         <div className='entry-header-meta'>
           <div className='entry-date-time'>
-            <p className='entry-date'>{formatEntryDate(data.entryDate)}</p>
-            <p className='entry-time'>{formatEntryTime(data.entryDate)}</p>
+            <p className='entry-date'>{formatEntryDate(entryMillis)}</p>
+            <p className='entry-time'>{formatEntryTime(entryMillis)}</p>
             <div className='entry-date-right-col'>
-              <p className='entry-last-updated'>{formatModifiedDate(data.modifiedDate)}</p>
+              <p className='entry-last-updated'>{formatModifiedDate(modMillis)}</p>
               <button className='menu-btn'></button>
             </div>
           </div>
