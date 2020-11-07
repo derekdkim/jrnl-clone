@@ -1,0 +1,33 @@
+.mm-container {
+  z-index: 999;
+  right: 0;
+  top: 21px;
+  width: 140px;
+  height: 106px;
+
+  position: absolute;
+  border: none;
+  box-shadow: 0 1px 8px rgba(0,0,0,.6);
+  border-radius: 2px;
+}
+
+.mm-list {
+  padding: 8px;
+  list-style: none;
+  margin: 0;
+}
+
+.mm-list a {
+  text-decoration: none;
+}
+
+.mm-list-item {
+  padding: 0 8px;
+  height: 30px;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.9);
+
+  display: flex;
+  align-items: center;
+}

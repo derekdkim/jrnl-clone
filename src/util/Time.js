@@ -5,7 +5,13 @@ const entryMonths = ['Jan', 'Feb', 'Mar',
 
 // Format mmm/dd/year to display on the entry header
 const formatEntryDate = (date) => {
-  const workingDate = new Date(date);
+  let workingDate;
+  if (date instanceof Date) {
+    workingDate = date;
+  } else {
+    workingDate = new Date(date);
+  }
+
   const year = workingDate.getFullYear();
   const month = workingDate.getMonth();
   const day = workingDate.getDate();
@@ -16,7 +22,13 @@ const formatEntryDate = (date) => {
 
 // Format hh:mm to display on the entry header
 const formatEntryTime = (date) => {
-  const workingDate = new Date(date);
+  let workingDate;
+  if (date instanceof Date) {
+    workingDate = date;
+  } else {
+    workingDate = new Date(date);
+  }
+  
   let hr = workingDate.getHours();
   let AMPM = 'am';
   

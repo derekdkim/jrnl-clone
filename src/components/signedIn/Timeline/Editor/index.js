@@ -6,7 +6,7 @@ import firebase from '../../../../Firebase.js';
 import { formatEntryDate, formatEntryTime } from '../../../../util/Time.js';
 import { useModalContext } from '../../../../context/ModalContextProvider.js';
 
-const Editor = () => {
+const Editor = (props) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [entryDate, setEntryDate] = useState(Date.now());
@@ -23,6 +23,16 @@ const Editor = () => {
     }
   }, [selectedDate]);
 
+  // If Editor was rendered with props, fill in the form with props data
+  useEffect(() => {
+    if (props.data) {
+      const { data } = props;
+      setTitle(data.title);
+      setContent(data.content);
+      setEntryDate(data.entryDate);
+    }
+  }, []);
+
   const openTimeModal = () => {
     setSelectedDate(entryDate);
     toggleTimeModal(true);
@@ -37,7 +47,10 @@ const Editor = () => {
   }
 
   const submitEntry = () => {
-    fDB.collection('users').doc(fAuth.currentUser.uid).collection('entries').doc()
+    
+    if (props.data) {
+      // Edit entry
+      fDB.collection('users').doc(fAuth.currentUser.uid).collection('entries').doc(props.data.id)
       .set({
         title: title,
         content: content,
@@ -47,6 +60,20 @@ const Editor = () => {
       }, { merge: true }).catch((error) => {
         console.log(`Failed: ${error.message}`);
       });
+    } else {
+      // Add new entry
+      fDB.collection('users').doc(fAuth.currentUser.uid).collection('entries').doc()
+      .set({
+        title: title,
+        content: content,
+        journal: 'Placeholder Journal',
+        entryDate: new Date(entryDate),
+        modifiedDate: new Date()
+      }, { merge: true }).catch((error) => {
+        console.log(`Failed: ${error.message}`);
+      });
+    }
+    
   }
 
   return (
@@ -70,6 +97,7 @@ const Editor = () => {
             type='text'
             placeholder='Entry title (optional)'
             onChange={updateTitle}
+            value={title}
           />
         </div>
         <div>
@@ -77,6 +105,7 @@ const Editor = () => {
             className='editor-content'
             placeholder='How was your day?'
             onChange={updateContent}
+            value={content}
           />
         </div>
       </div>

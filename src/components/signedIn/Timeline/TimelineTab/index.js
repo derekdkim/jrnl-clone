@@ -40,7 +40,7 @@ const TimelineTab = () => {
         let dataArr = [];
         let entryDateArr = [];
         fetchedData.forEach(entry => {
-          dataArr.push(entry.data());
+          dataArr.push({...entry.data(), id: entry.id});
 
           // Store entry date ranges for querying purposes
           let entryTimestamp = entry.data().entryDate.toDate();
@@ -102,7 +102,7 @@ const TimelineTab = () => {
         //  Save each entry data to Array so it can be rendered with map()
         let dataArr = [];
         fetchedData.forEach(entry => {
-          dataArr.push(entry.data());
+          dataArr.push({...entry.data(), id: entry.id});
         });
         
         // Set bundled entries to state
