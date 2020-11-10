@@ -1,25 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './index.css';
 import { Link } from 'react-router-dom';
 
 import firebase from '../../../../Firebase.js';
 
 const MenuModal = (props) => {
-  const { id } = props;
+  const { id, toggleMenuModal, redirectOnDelete } = props;
   const fDB = firebase.firestore();
   const fAuth = firebase.auth();
+
+  useEffect(() => {
+    document.addEventListener('click', closeModal);
+  }, []);
   
   const deleteEntry = () => {
     fDB.collection('users').doc(fAuth.currentUser.uid).collection('entries').doc(id)
     .delete()
     .then((result) => {
-      console.log('Entry successfully deleted.');
       // Unrender menu modal
-      props.toggleMenuModal(false);
+      closeModal();
+      redirectOnDelete();
     })
     .catch((error) => {
       console.log(`Error: ${error.message}`);
     });
+  }
+
+  const closeModal = () => {
+    toggleMenuModal(false);
+    document.removeEventListener('click', closeModal);
   }
 
   return (

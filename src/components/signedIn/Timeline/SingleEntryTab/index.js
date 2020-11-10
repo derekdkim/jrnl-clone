@@ -18,31 +18,32 @@ const SingleEntryTab = (props) => {
   const fAuth = firebase.auth();
   const fDB = firebase.firestore();
 
-  useEffect(() => {
+  const fetchUserEntries = async () => {
+    setIsLoading(true);
     let fetchedSuccessfully = false;
-    const fetchUserEntries = async () => {
-      const fetchedData = await fDB.collection('users').doc(fAuth.currentUser.uid).collection('entries').doc(id)
-        .get()
-        .then((result) => {
-          fetchedSuccessfully = true;
-          return result;
-        })
-        .catch((error) => {
-          console.log(`Error: ${error.message}`);
-        });
-      
-      // If fetchedData is resolved
-      if (fetchedSuccessfully) {
-        setEntryData({...fetchedData.data(), id: fetchedData.id});
+    const fetchedData = await fDB.collection('users').doc(fAuth.currentUser.uid).collection('entries').doc(id)
+      .get()
+      .then((result) => {
+        fetchedSuccessfully = true;
+        return result;
+      })
+      .catch((error) => {
+        console.log(`Error: ${error.message}`);
+      });
+    
+    // If fetchedData is resolved
+    if (fetchedSuccessfully) {
+      setEntryData({...fetchedData.data(), id: fetchedData.id});
 
-        // Set loading state to off to render fetched entries
-        setIsLoading(false);
-      } else {
-        // If the entry retrieval fails
-        setLoadingMessage('Failed to load entries.');
-      }
+      // Set loading state to off to render fetched entries
+      setIsLoading(false);
+    } else {
+      // If the entry retrieval fails
+      setLoadingMessage('Failed to load entries.');
     }
+  }
 
+  useEffect(() => {
     fetchUserEntries();
   }, []);
 

@@ -19,62 +19,64 @@ const TimelineTab = () => {
   const fAuth = firebase.auth();
   const fDB = firebase.firestore();
 
+  const fetchUserEntries = async () => {
+    setIsLoading(true);
+    let fetchedSuccessfully = false;
+    const fetchedData = await fDB.collection('users').doc(fAuth.currentUser.uid).collection('entries')
+      .orderBy('entryDate', 'desc')
+      .get()
+      .then((result) => {
+        fetchedSuccessfully = true;
+        return result;
+      })
+      .catch((error) => {
+        console.log(`Error: ${error.message}`);
+      });
+    
+    // If fetchedData is resolved
+    if (fetchedSuccessfully) {
+      //  Save each entry data to Array so it can be rendered with map()
+      let dataArr = [];
+      let entryDateArr = [];
+      fetchedData.forEach(entry => {
+        dataArr.push({...entry.data(), id: entry.id});
+
+        // Store entry date ranges for querying purposes
+        let entryTimestamp = entry.data().entryDate.toDate();
+        let newQueryDate = {
+          year: entryTimestamp.getFullYear(),
+          month: entryTimestamp.getMonth()
+        };
+        
+        // Prevent duplicates
+        if (!entryDateArr.some((entry) =>
+          entry.month === newQueryDate.month && entry.year === newQueryDate.year
+        )) {
+          entryDateArr.push(newQueryDate);
+        }
+      });
+      
+      // Set bundled entries to state
+      setEntryData(dataArr);
+      setEntryDates(entryDateArr);
+
+      // Set loading state to off to render fetched entries
+      setIsLoading(false);
+    } else {
+      // If the entry retrieval fails
+      setLoadingMessage('Failed to load entries.');
+    }
+  }
+
   // Initial entry fetching
   useEffect(() => {
-    let fetchedSuccessfully = false;
-    const fetchUserEntries = async () => {
-      const fetchedData = await fDB.collection('users').doc(fAuth.currentUser.uid).collection('entries')
-        .orderBy('entryDate', 'desc')
-        .get()
-        .then((result) => {
-          fetchedSuccessfully = true;
-          return result;
-        })
-        .catch((error) => {
-          console.log(`Error: ${error.message}`);
-        });
-      
-      // If fetchedData is resolved
-      if (fetchedSuccessfully) {
-        //  Save each entry data to Array so it can be rendered with map()
-        let dataArr = [];
-        let entryDateArr = [];
-        fetchedData.forEach(entry => {
-          dataArr.push({...entry.data(), id: entry.id});
-
-          // Store entry date ranges for querying purposes
-          let entryTimestamp = entry.data().entryDate.toDate();
-          let newQueryDate = {
-            year: entryTimestamp.getFullYear(),
-            month: entryTimestamp.getMonth()
-          };
-          
-          // Prevent duplicates
-          if (!entryDateArr.some((entry) =>
-            entry.month === newQueryDate.month && entry.year === newQueryDate.year
-          )) {
-            entryDateArr.push(newQueryDate);
-          }
-        });
-        
-        // Set bundled entries to state
-        setEntryData(dataArr);
-        setEntryDates(entryDateArr);
-
-        // Set loading state to off to render fetched entries
-        setIsLoading(false);
-      } else {
-        // If the entry retrieval fails
-        setLoadingMessage('Failed to load entries.');
-      }
-    }
-
     fetchUserEntries();
   }, []);
 
   // Queried entry fetching
   useEffect(() => {
     const fetchQueriedEntries = async () => {
+      setIsLoading(true);
       // Define range of query
       let yearUpperRange = queryDate.month === 11 ? queryDate.year + 1 : queryDate.year;
       let monthUpperRange = queryDate.month === 11 ? 1 : queryDate.month + 1;
@@ -133,14 +135,20 @@ const TimelineTab = () => {
       <div className='container-container'>
         {isLoading && <p>{loadingMessage}</p>}
         {modal.timeModalActive && <TimeChangeModal />}
-        <Editor />
+        <Editor fetchUserEntries={fetchUserEntries} />
 
-        {entryData.map((entry, index) => 
-          <Entry 
-            data={entry}
-            key={index}
-            />
-        )}
+        {!isLoading && entryData.map((entry, index) => {
+          // Only display 20 most recent entries
+          if (index < 20) {
+            return (
+              <Entry 
+              data={entry}
+              key={index}
+              fetchUserEntries={fetchUserEntries}
+              />
+            );
+          }
+        })}
       </div>
     </div>
   );

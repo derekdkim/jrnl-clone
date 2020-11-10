@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './index.css';
+import { useHistory } from 'react-router-dom';
 
 import { formatEntryDate, formatEntryTime, formatModifiedDate } from '../../../../util/Time.js';
 import MenuModal from '../MenuModal';
@@ -8,12 +9,22 @@ const Entry = (props) => {
   const [menuModalActive, toggleMenuModal] = useState(false);
   const { data } = props;
 
+  const history = useHistory();
   const modMillis = data.modifiedDate.toMillis();
   const entryMillis = data.entryDate.toMillis();
 
   const openMenuModal = () => {
-    console.log(data);
     toggleMenuModal(true);
+  }
+
+  const redirectOnDelete = () => {
+    // If entry was rendered from a multi entry tab, rerender.
+    if (props.fetchUserEntries) {
+      props.fetchUserEntries();
+    } else {
+      // If from a single entry tab, redirect to timeline tab.
+      history.push('/timeline/');
+    }
   }
 
   return(
@@ -27,7 +38,13 @@ const Entry = (props) => {
             <p className='entry-date'>{formatEntryDate(entryMillis)}</p>
             <p className='entry-time'>{formatEntryTime(entryMillis)}</p>
             <div className='entry-date-right-col'>
-              {menuModalActive && <MenuModal toggleMenuModal={toggleMenuModal} id={data.id} />}
+              {menuModalActive 
+                && <MenuModal 
+                    toggleMenuModal={toggleMenuModal} 
+                    id={data.id}
+                    redirectOnDelete={redirectOnDelete}
+                   />
+              }
               <p className='entry-last-updated'>{formatModifiedDate(modMillis)}</p>
               <button className='menu-btn' onClick={openMenuModal}></button>
             </div>

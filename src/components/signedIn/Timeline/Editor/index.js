@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './index.css';
 import TextareaAutosize from 'react-textarea-autosize';
+import { useHistory } from 'react-router-dom';
 
 import firebase from '../../../../Firebase.js';
 import { formatEntryDate, formatEntryTime } from '../../../../util/Time.js';
@@ -12,6 +13,7 @@ const Editor = (props) => {
   const [entryDate, setEntryDate] = useState(Date.now());
 
   const modal = useModalContext();
+  const history = useHistory();
   const { setSelectedDate, selectedDate, toggleTimeModal } = modal;
   const fAuth = firebase.auth();
   const fDB = firebase.firestore();
@@ -29,7 +31,7 @@ const Editor = (props) => {
       const { data } = props;
       setTitle(data.title);
       setContent(data.content);
-      setEntryDate(data.entryDate);
+      setEntryDate(data.entryDate.toDate());
     }
   }, []);
 
@@ -51,29 +53,40 @@ const Editor = (props) => {
     if (props.data) {
       // Edit entry
       fDB.collection('users').doc(fAuth.currentUser.uid).collection('entries').doc(props.data.id)
-      .set({
-        title: title,
-        content: content,
-        journal: 'Placeholder Journal',
-        entryDate: new Date(entryDate),
-        modifiedDate: new Date()
-      }, { merge: true }).catch((error) => {
-        console.log(`Failed: ${error.message}`);
-      });
+        .set({
+          title: title,
+          content: content,
+          journal: 'Placeholder Journal',
+          entryDate: new Date(entryDate),
+          modifiedDate: new Date()
+        }, { merge: true })
+        .then(() => history.push(`/timeline/view/${props.data.id}`))
+        .catch((error) => {
+          console.log(`Failed: ${error.message}`);
+        });
     } else {
       // Add new entry
       fDB.collection('users').doc(fAuth.currentUser.uid).collection('entries').doc()
-      .set({
-        title: title,
-        content: content,
-        journal: 'Placeholder Journal',
-        entryDate: new Date(entryDate),
-        modifiedDate: new Date()
-      }, { merge: true }).catch((error) => {
-        console.log(`Failed: ${error.message}`);
-      });
+        .set({
+          title: title,
+          content: content,
+          journal: 'Placeholder Journal',
+          entryDate: new Date(entryDate),
+          modifiedDate: new Date()
+        }, { merge: true })
+        .then((result) => {
+          return result;
+        })
+        .then(() => {
+          setTitle('');
+          setContent('');
+          setEntryDate(new Date());
+          props.fetchUserEntries();
+        })
+        .catch((error) => {
+          console.log(`Failed: ${error.message}`);
+        });
     }
-    
   }
 
   return (
@@ -83,7 +96,7 @@ const Editor = (props) => {
           <img src={require('../../../../images/avatar.png')} alt='avatar'/>
         </div>
         <div className='entry-header-meta'>
-          <div className='entry-date-time' onClick={openTimeModal}>
+          <div className='entry-date-time editor-time-btn' onClick={openTimeModal}>
             <p className='editor-date'>{formatEntryDate(entryDate)}</p>
             <p className='entry-time editor-header-elem'>{`@ ${formatEntryTime(entryDate)}`}</p>
           </div>

@@ -9,6 +9,10 @@
   margin-right: 5px;
 }
 
+.editor-time-btn {
+  cursor: pointer;
+}
+
 .editor-title {
   padding: 10px 16px;
   border-width: 1px 0 1px; 
