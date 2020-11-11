@@ -1,31 +1,38 @@
 const SettingsContent = [
   {
     name: 'Profile',
-    to: '/account/profile/'
+    to: '/account/profile/',
+    active: true
   },
   {
     name: 'Social Connect',
-    to: '/account/settings/social-connect/'
+    to: '/account/settings/social-connect/',
+    active: false
   },
   {
     name: 'Security',
-    to: '/account/settings/security/'
+    to: '/account/settings/security/',
+    active: true
   },
   {
     name: 'Reminders',
-    to: '/account/setttings/reminders/'
+    to: '/account/setttings/reminders/',
+    active: false
   },
   {
     name: 'Email to JRNL',
-    to: '/account/settings/email-to-jrnl/'
+    to: '/account/settings/email-to-jrnl/',
+    active: false
   },
   {
     name: 'Billing',
-    to: '/account/settings/billing/'
+    to: '/account/settings/billing/',
+    active: false
   },
   {
     name: 'Themes',
-    to: '/account/settings/themes/'
+    to: '/account/settings/themes/',
+    active: false
   }
 ];
 

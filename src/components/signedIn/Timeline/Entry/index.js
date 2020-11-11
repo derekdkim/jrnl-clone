@@ -49,7 +49,7 @@ const Entry = (props) => {
               <button className='menu-btn' onClick={openMenuModal}></button>
             </div>
           </div>
-          <div className='entry-journal'><p>Account in Placeholder Journal</p></div>
+          <div className='entry-journal'><p>Placeholder Journal</p></div>
         </div>
       </div>
       <div className='entry-body'>
@@ -61,7 +61,6 @@ const Entry = (props) => {
         </div>
       </div>
       <div className='entry-footer'>
-        <button className='entry-comments-btn'>COMMENTS</button>
       </div>
     </div>
   );

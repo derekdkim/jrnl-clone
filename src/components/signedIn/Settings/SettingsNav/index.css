@@ -22,6 +22,7 @@
   height: 48px;
   padding: 10px 16px;
   box-sizing: border-box;
+  user-select: none;
 
   font-size: 16px;
   line-height: 130%;
@@ -32,4 +33,11 @@
   background: none;
   border: none;
   width: 100%;
+}
+
+.disabled-nav-item {
+  background-color: rgba(0,0,0,.12);
+  color: rgba(0, 0, 0,.26);
+  cursor: default;
+  pointer-events: none;
 }

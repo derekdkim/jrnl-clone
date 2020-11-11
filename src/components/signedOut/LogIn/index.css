@@ -3,3 +3,7 @@
   text-decoration: none;
   font-size: 12px;
 }
+
+#guest-login-btn {
+  background-color: #f9c74f;
+}

@@ -50,12 +50,16 @@ const SingleEntryTab = (props) => {
   return (
     <div id='content'>
     <div className='container-container'>
-      {isLoading && <p>{loadingMessage}</p>}
       { !isLoading && !viewMode &&
         <div>
           {modal.timeModalActive && <TimeChangeModal />}
           <Editor data={entryData}/>
         </div>
+      }
+      {isLoading 
+        && <div className='entry-container entry-dialog'>
+              <p className='message-item'>{loadingMessage}</p>
+            </div>
       }
       { !isLoading && viewMode && <Entry data={entryData} /> }
     </div>

@@ -27,7 +27,7 @@ const SettingsNav = () => {
           {SettingsContent.map((item, index) => 
             <NavLink
               to={item.to}
-              className='vert-nav-item'
+              className={item.active ? 'vert-nav-item' : 'vert-nav-item disabled-nav-item'}
               key={index}
             >{item.name}</NavLink>
           )}

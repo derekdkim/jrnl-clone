@@ -1,0 +1,8 @@
+.two-col-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.two-col-item {
+  margin: 0 16px;
+}

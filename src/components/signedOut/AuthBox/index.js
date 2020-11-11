@@ -15,13 +15,13 @@ const AuthBox = (props) => {
           <NavLink id='signup-btn' className={tab === 'signup' ? 'selected-tab' : ''} to='/signup/'>SIGNUP</NavLink>
           <NavLink id='login-btn' className={tab === 'login' ? 'selected-tab' : ''} to='/login/'>LOGIN</NavLink>
         </div>
-          <div>
-            {
-              tab === 'login'
-              ? <LogIn />
-              : <SignUp />
-            }
-          </div>
+        <div>
+          {
+            tab === 'login'
+            ? <LogIn />
+            : <SignUp />
+          }
+        </div>
       </div>
     </div>
   );

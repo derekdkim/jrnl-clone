@@ -1,0 +1,39 @@
+.settings-anchor {
+  padding: 10px 16px;
+  line-height: 15px;
+}
+
+.settings-anchor-text {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 11px;
+  text-decoration: none;
+}
+
+.settings-link {
+  text-decoration: none;
+  color: #00b4cc;
+}
+
+.settings-body {
+  padding: 16px;
+}
+
+.settings-input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-footer {
+  padding: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.profile-btn {
+  margin: 0 8px;
+}
+
+.profile-btn:disabled {
+  background-color: rgba(0,0,0,.12);
+  color: rgba(0, 0, 0,.26);
+}

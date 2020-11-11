@@ -7,6 +7,14 @@ import firebase from '../../../../Firebase.js';
 const SettingsTab = () => {
   const user = firebase.auth().currentUser;
 
+  const showDisplayName = () => {
+    if (typeof user.displayName === 'string') {
+      return user.displayName;
+    } else {
+      return user.email;
+    }
+  }
+
   return(
     <div id='content'>
       <div className='container-container'>
@@ -20,7 +28,7 @@ const SettingsTab = () => {
                 <img src={require('../../../../images/avatar.png')} alt='avatar' />
               </div>
               <div className='profile-text-container'>
-                <span className='profile-name'>{user.email}</span>
+                <span className='profile-name'>{showDisplayName()}</span>
                 <span className='profile-email'>{user.email}</span>
                 <span className='profile-joined'>Joined on May 15, 2018</span>
               </div>

@@ -61,7 +61,11 @@ const TimelineTab = () => {
       setEntryDates(entryDateArr);
 
       // Set loading state to off to render fetched entries
-      setIsLoading(false);
+      if (dataArr.length > 0) {
+        setIsLoading(false);
+      } else {
+        setLoadingMessage('You have no entries. Try writing your first one!');
+      }
     } else {
       // If the entry retrieval fails
       setLoadingMessage('Failed to load entries.');
@@ -112,6 +116,7 @@ const TimelineTab = () => {
 
         // Set loading state to off to render fetched entries
         setIsLoading(false);
+
       } else {
         // If the entry retrieval fails
         setLoadingMessage('Failed to load entries.');
@@ -133,10 +138,14 @@ const TimelineTab = () => {
         setQueryDate={setQueryDate}
       />
       <div className='container-container'>
-        {isLoading && <p>{loadingMessage}</p>}
         {modal.timeModalActive && <TimeChangeModal />}
         <Editor fetchUserEntries={fetchUserEntries} />
 
+        {isLoading 
+          && <div className='entry-container entry-dialog'>
+               <p className='message-item'>{loadingMessage}</p>
+             </div>
+        }
         {!isLoading && entryData.map((entry, index) => {
           // Only display 20 most recent entries
           if (index < 20) {
@@ -147,6 +156,8 @@ const TimelineTab = () => {
               fetchUserEntries={fetchUserEntries}
               />
             );
+          } else {
+            return null;
           }
         })}
       </div>

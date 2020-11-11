@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './index.css';
 import firebase from '../../../Firebase.js';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { useAuthContext } from '../../../context/AuthContextProvider.js';
 
@@ -57,6 +57,16 @@ const LogIn = (props) => {
     });
   }
 
+  const guestLogin = (e) => {
+    e.preventDefault();
+    firebase.auth().signInWithEmailAndPassword('demouser@imaginarydomain.com', 'TestAllDay').then(function() {
+      auth.setLoggedIn(true);
+      history.push('/timeline');
+    }).catch(function(error) {
+      console.log(`Error ${error.code}: ${error.message}`);
+    });
+  }
+
   useEffect(() => {
     if (email.valid && password.valid) {
       setFormCompleted(true);
@@ -99,8 +109,14 @@ const LogIn = (props) => {
             className={formCompleted ? 'auth-btn' : 'auth-btn disabled-btn'} 
             disabled={!formCompleted}
           >LOGIN TO MY ACCOUNT</button>
+          <button 
+            className='auth-btn' 
+            id='guest-login-btn'
+            type='button'
+            onClick={guestLogin}
+          >LOGIN AS GUEST</button>
           <div>
-            <a id='pwd-recovery-link' href='/forgot-password/'>FORGOT PASSWORD?</a>
+            <Link id='pwd-recovery-link' to='/forgot-password/'>FORGOT PASSWORD?</Link>
           </div>
         </form>
       </div>

@@ -3,9 +3,19 @@ import { NavLink } from 'react-router-dom';
 import './index.css';
 
 import { useAuthContext } from '../../context/AuthContextProvider.js';
+import firebase from '../../Firebase.js';
 
 const Header = () => {
   const auth = useAuthContext();
+  const fAuth = firebase.auth();
+
+  const showDisplayName = () => {
+    if (auth.loggedIn) {
+      const displayName = fAuth.currentUser.displayName;
+      
+      return typeof displayName === 'string' ? displayName : 'User Profile';
+    }
+  }
 
   // Only render nav components if the user is logged in.
   const renderNavComponents = () => {
@@ -52,7 +62,7 @@ const Header = () => {
               activeClassName='active-tab'
             >
               <img id='nav-profile-pic' src={require('../../images/avatar.png')} alt='avatar'/>
-              <span>USER_PROFILE</span>
+              <span>{showDisplayName()}</span>
               <span className='nav-active-bar'></span>
           </NavLink>
         </div>
@@ -69,7 +79,7 @@ const Header = () => {
       {
         auth.loggedIn
           ? renderNavComponents()
-          : <div></div>
+          : null
       }
     </header>
   );
