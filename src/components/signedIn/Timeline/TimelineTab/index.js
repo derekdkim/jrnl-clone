@@ -12,8 +12,16 @@ const TimelineTab = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingMessage, setLoadingMessage] = useState('Entries are currently loading');
   const [entryData, setEntryData] = useState([]);
-  const [entryDates, setEntryDates] = useState([]);
+
+  // Date Query mode states
   const [queryDate, setQueryDate] = useState(null);
+  const [entryDates, setEntryDates] = useState([]);
+  const [queryModeResult, setQueryModeResult] = useState(null);
+
+  // Search mode states
+  const [searchMode, toggleSearchMode] = useState(false);
+  const [searchKey, setSearchKey] = useState('');
+  const [searchModeResult, setSearchModeResult] = useState(null);
 
   const modal = useModalContext();
   const fAuth = firebase.auth();
@@ -112,7 +120,7 @@ const TimelineTab = () => {
         });
         
         // Set bundled entries to state
-        setEntryData(dataArr);
+        setQueryModeResult(dataArr);
 
         // Set loading state to off to render fetched entries
         setIsLoading(false);
@@ -131,11 +139,53 @@ const TimelineTab = () => {
     
   }, [queryDate]);
 
+  // Keyword search function
+  useEffect(() => {
+    if (searchMode && searchKey.length > 0) {
+      const matchingEntries = entryData.filter((entry) => entry.title.includes(searchKey) || entry.content.includes(searchKey)); 
+      setSearchModeResult(matchingEntries);
+      setIsLoading(false);
+    }
+  }, [searchMode, searchKey, entryData]);
+
+  // Catch-all entry rendering function
+  const renderEntries = () => {
+    const selectedEntries = searchMode ? searchModeResult : queryDate !== null ? queryModeResult : entryData;
+
+    if (selectedEntries !== null && selectedEntries.length > 0) {
+      return (selectedEntries.map((entry, index) => {
+        // Only display 20 most recent entries in default mode
+        if (searchMode || queryDate !== null || index < 20) {
+          return (
+            <Entry 
+            data={entry}
+            key={index}
+            fetchUserEntries={fetchUserEntries}
+            />
+          );
+        } else {
+          return null;
+        }
+      }));
+    } else {
+      setIsLoading(true);
+      if (selectedEntries === null) {
+        setLoadingMessage('Entries are currently loading');
+      } else if (selectedEntries.length === 0) {
+        setLoadingMessage('No matching entries found.');
+      }
+      return null;
+    }
+  }
+
   return(
     <div id='content'>
       <TimelineHeader 
         entryDates={entryDates}
         setQueryDate={setQueryDate}
+        searchMode={searchMode}
+        toggleSearchMode={toggleSearchMode}
+        setSearchKey={setSearchKey}
       />
       <div className='container-container'>
         {modal.timeModalActive && <TimeChangeModal />}
@@ -146,20 +196,7 @@ const TimelineTab = () => {
                <p className='message-item'>{loadingMessage}</p>
              </div>
         }
-        {!isLoading && entryData.map((entry, index) => {
-          // Only display 20 most recent entries
-          if (index < 20) {
-            return (
-              <Entry 
-              data={entry}
-              key={index}
-              fetchUserEntries={fetchUserEntries}
-              />
-            );
-          } else {
-            return null;
-          }
-        })}
+        {!isLoading && renderEntries()}
       </div>
     </div>
   );

@@ -50,3 +50,11 @@
   opacity: 50%;
   pointer-events: none;
 }
+
+.search-input {
+  border: none;
+  font-size: 1em;
+  box-sizing: border-box;
+  margin: 4px 0;
+  background: transparent;
+}
