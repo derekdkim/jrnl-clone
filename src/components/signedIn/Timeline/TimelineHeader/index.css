@@ -50,6 +50,11 @@
   pointer-events: none;
 }
 
+.disabled-icon-btn {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 .search-input {
   border: none;
   font-size: 1em;

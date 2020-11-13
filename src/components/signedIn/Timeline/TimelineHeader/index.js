@@ -95,10 +95,10 @@ const TimelineHeader = (props) => {
               <span>{selectedIndex !== null ? `${entryDates[selectedIndex].year} / ${entryMonths[entryDates[selectedIndex].month].toUpperCase()}` : 'RECENT'}</span>
             </div>
             <div>
-              <button className={entryDates.length > 0 && (selectedIndex === null || selectedIndex < entryDates.length - 1) ? 'icon-btn left-btn' : 'icon-btn left-btn disabled-btn'} onClick={pushDateBackward}>
+              <button className={entryDates.length > 0 && (selectedIndex === null || selectedIndex < entryDates.length - 1) ? 'icon-btn left-btn' : 'icon-btn left-btn disabled-icon-btn'} onClick={pushDateBackward}>
                 <img className='btn-icon' src={require('../../../../images/angle-left.svg')} alt='left'/>
               </button>
-              <button className={selectedIndex !== null && selectedIndex > 0 ? 'icon-btn right-btn' : 'icon-btn right-btn disabled-btn'} onClick={pushDateForward}>
+              <button className={selectedIndex !== null && selectedIndex > 0 ? 'icon-btn right-btn' : 'icon-btn right-btn disabled-icon-btn'} onClick={pushDateForward}>
                 <img className='btn-icon' src={require('../../../../images/angle-right.svg')} alt='right'/>
               </button>
             </div>
