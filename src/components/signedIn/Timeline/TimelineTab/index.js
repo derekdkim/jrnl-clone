@@ -142,9 +142,11 @@ const TimelineTab = () => {
   // Keyword search function
   useEffect(() => {
     if (searchMode && searchKey.length > 0) {
-      const matchingEntries = entryData.filter((entry) => entry.title.includes(searchKey) || entry.content.includes(searchKey)); 
+      const matchingEntries = entryData.filter((entry) => entry.title.toLowerCase().includes(searchKey) || entry.content.toLowerCase().includes(searchKey)); 
       setSearchModeResult(matchingEntries);
       setIsLoading(false);
+    } else if (searchMode) {
+      setLoadingMessage('Please enter a keyword or phrase.');
     }
   }, [searchMode, searchKey, entryData]);
 

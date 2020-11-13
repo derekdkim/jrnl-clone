@@ -47,7 +47,6 @@
 }
 
 .disabled-btn {
-  opacity: 50%;
   pointer-events: none;
 }
 

@@ -13,8 +13,10 @@ const Profile = () => {
   const fAuth = firebase.auth();
 
   useEffect(() => {
-    if (displayNameValue.length > 0 || displayNameValue !== ' ') {
-      setFormComplete(true);
+    if (displayNameValue.length > 0) {
+      if (displayNameValue !== ' ') {
+        setFormComplete(true);
+      }
     }
   }, [displayNameValue]);
 

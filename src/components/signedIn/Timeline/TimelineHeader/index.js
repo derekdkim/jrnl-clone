@@ -60,7 +60,7 @@ const TimelineHeader = (props) => {
     // On enter
     if (e.key === 'Enter' || e.key === 'NumpadEnter') {
       if (keyword.length > 0) {
-        setSearchKey(keyword);
+        setSearchKey(keyword.toLowerCase());
         e.stopPropagation();
       }
     }
