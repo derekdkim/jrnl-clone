@@ -1,9 +1,8 @@
-.editor-header-elem {
+.editor-header-meta {
   color: #00b4cc;
 }
 
 .editor-date {
-  color: #00b4cc;
   font-size: 14px;
   font-weight: 700;
   margin-right: 5px;
@@ -11,6 +10,10 @@
 
 .editor-time-btn {
   cursor: pointer;
+}
+
+.editor-time-btn:hover {
+  color: #00cbe6 !important;
 }
 
 .editor-title {
@@ -68,9 +71,17 @@
   color: rgba(0, 0, 0, 0.9)
 }
 
+.cancel-btn:hover {
+  color: #00b4cc;
+}
+
 .save-btn {
   margin-left: 10px;
   background-color: #00b4cc;
   color: white;
   border-radius: 3px;
+}
+
+.save-btn:hover {
+  background-color: #00cbe6;
 }

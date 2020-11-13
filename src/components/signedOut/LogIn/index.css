@@ -4,6 +4,11 @@
   font-size: 12px;
 }
 
+#pwd-recovery-link:hover {
+  color: #00cbe6;
+}
+
 #guest-login-btn {
   background-color: #f9c74f;
 }
+

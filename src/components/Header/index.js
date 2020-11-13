@@ -25,6 +25,7 @@ const Header = () => {
           <NavLink 
             to='/timeline/'
             id='nav-timeline'
+            className='top-nav-item'
             activeClassName='active-tab'
           >
             <span>TIMELINE</span>
@@ -33,6 +34,7 @@ const Header = () => {
           <NavLink 
             to='/journals/'
             id='nav-journals'
+            className='top-nav-item'
             activeClassName='active-tab'
           >
             <span>JOURNALS</span>
@@ -41,6 +43,7 @@ const Header = () => {
           <NavLink 
             to='/books/'
             id='nav-books'
+            className='top-nav-item'
             activeClassName='active-tab'
           >
             <span>BOOKS</span>
@@ -49,6 +52,7 @@ const Header = () => {
           <NavLink 
             to='/all-about-me/'
             id='nav-aam'
+            className='top-nav-item'
             activeClassName='active-tab'
           >
             <span>ALL ABOUT ME</span>
@@ -59,6 +63,7 @@ const Header = () => {
           <NavLink 
               to='/account/settings/'
               id='nav-settings'
+              className='top-nav-item'
               activeClassName='active-tab'
             >
               <img id='nav-profile-pic' src={require('../../images/avatar.png')} alt='avatar'/>

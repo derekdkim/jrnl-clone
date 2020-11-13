@@ -65,6 +65,11 @@
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   outline: none;
+  transition: border 0.6s ease-out;
+}
+
+.text-input:focus {
+  border-color: #00b4cc;
 }
 
 .text-input-error {

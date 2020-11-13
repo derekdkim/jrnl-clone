@@ -95,12 +95,12 @@ const Editor = (props) => {
         <div className='entry-avatar'>
           <img src={require('../../../../images/avatar.png')} alt='avatar'/>
         </div>
-        <div className='entry-header-meta'>
+        <div className='entry-header-meta editor-header-meta'>
           <div className='entry-date-time editor-time-btn' onClick={openTimeModal}>
             <p className='editor-date'>{formatEntryDate(entryDate)}</p>
-            <p className='entry-time editor-header-elem'>{`@ ${formatEntryTime(entryDate)}`}</p>
+            <p className='entry-time'>{`@ ${formatEntryTime(entryDate)}`}</p>
           </div>
-          <div className='entry-journal editor-header-elem'><p>Placeholder Journal</p></div>
+          <div className='entry-journal'><p>Placeholder Journal</p></div>
         </div>
       </div>
       <div className='editor-body'>

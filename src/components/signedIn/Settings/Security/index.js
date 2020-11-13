@@ -77,7 +77,7 @@ const Security = () => {
             <div className='input-container two-col-item'>
               <label htmlFor='password-input'>New Password</label>
               <input 
-                type='text' 
+                type='password' 
                 className='text-input' 
                 id='password-input'
                 onChange={handleInput}
@@ -86,11 +86,11 @@ const Security = () => {
               <span className='text-input-error'>{errorMsg0}</span>
             </div>
             <div className='input-container'>
-              <label htmlFor='password-input'>Confirm Password</label>
+              <label htmlFor='password-conf-input'>Confirm Password</label>
               <input 
-                type='text' 
+                type='password' 
                 className='text-input' 
-                id='password-input'
+                id='password-conf-input'
                 onChange={handleInputConfirm}
                 placeholder='Repeat your new password'
               ></input>

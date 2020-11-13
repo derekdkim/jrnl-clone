@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './index.css';
@@ -9,6 +9,10 @@ const TimeChangeModal = () => {
   const [pickedDate, setPickedDate] = useState(new Date());
   const modal = useModalContext();
   const { setSelectedDate, toggleTimeModal } = modal;
+
+  useEffect(() => {
+    document.addEventListener('click', closeModal);
+  }, []);
 
   const updateDate = () => {
     console.log('Date updated');
@@ -24,6 +28,7 @@ const TimeChangeModal = () => {
   const closeModal = () => {
     console.log('Closing modal');
     toggleTimeModal(false);
+    document.removeEventListener('click', closeModal);
   }
 
   return(

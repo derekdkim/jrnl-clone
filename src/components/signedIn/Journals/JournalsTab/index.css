@@ -26,6 +26,12 @@
   border-radius: 3px;
 }
 
+.tab-btn:hover {
+  color: #00b4cc;
+  border-color: #00b4cc;
+  background: #fff;
+}
+
 .tab-body {
   padding: 8px 0;
 }
