@@ -10,6 +10,7 @@ const Security = () => {
   const [formComplete, setFormComplete] = useState(false);
   const [errorMsg0, setErrorMsg0] = useState('');
   const [errorMsg1, setErrorMsg1] = useState('');
+  const [guestErrMsg, setGuestErrMsg] = useState('');
   
   const history = useHistory();
   const fAuth = firebase.auth();
@@ -48,7 +49,9 @@ const Security = () => {
 
   const savePassword = async () => {
     let passwordAccepted = false;
-    await fAuth.currentUser.updatePassword(passwordInput)
+
+    if (fAuth.currentUser.email.toLowerCase() !== "testuser@test.com") {
+      await fAuth.currentUser.updatePassword(passwordInput)
       .then(() => {
         passwordAccepted = true;
       })
@@ -57,8 +60,11 @@ const Security = () => {
         setErrorMsg0(error, 'Failed to change password. Please try again.');
         setFormComplete(false);
       });
-    if (passwordAccepted) {
-      exitTab();
+      if (passwordAccepted) {
+        exitTab();
+      }
+    } else {
+      setGuestErrMsg("Guests cannot change their passwords.");
     }
   }
 
@@ -104,6 +110,7 @@ const Security = () => {
               className={formComplete ? 'save-btn profile-btn' : 'save-btn profile-btn disabled-btn'}
               disabled={!formComplete}
             >SAVE CHANGES</button>
+            <span className='text-input-error'>{guestErrMsg}</span>
           </div>
         </div>
       </div>

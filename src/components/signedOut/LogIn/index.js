@@ -59,7 +59,7 @@ const LogIn = (props) => {
 
   const guestLogin = (e) => {
     e.preventDefault();
-    firebase.auth().signInWithEmailAndPassword('demouser@imaginarydomain.com', 'TestAllDay').then(function() {
+    firebase.auth().signInWithEmailAndPassword("testUser@test.com", "testing1234").then(function() {
       auth.setLoggedIn(true);
       history.push('/timeline');
     }).catch(function(error) {
